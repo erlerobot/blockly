@@ -569,3 +569,26 @@ Blockly.readPythonFile = function(file) {
     rawFile.send(null);
     return code;
 };
+
+/**
+ * Legal characters for the unique ID.
+ * Should be all on a US keyboard.  No XML special characters or control codes.
+ * @private
+ */
+Blockly.CHARACTER_SOUP_ = '!#$%()*+,-./:;=?@[]^_`{|}~' +
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+/**
+ * Generate a unique ID.  This should be globally unique.
+ * 88 characters ^ 20 length ≈ 129 bits (one bit better than a UUID).
+ * @return {string}
+ */
+Blockly.genUid = function() {
+  var id = [];
+  for (var i = 0; i < 20; i++) {
+    id[i] = Blockly.CHARACTER_SOUP_.charAt(Math.random() *
+        Blockly.CHARACTER_SOUP_.length);
+  }
+  return id.join('');
+};
+
