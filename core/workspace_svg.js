@@ -705,6 +705,7 @@ Blockly.WorkspaceSvg.prototype.getBlocksBoundingBox = function() {
  * @private
  */
 Blockly.WorkspaceSvg.prototype.cleanUp_ = function() {
+  Blockly.Events.setGroup(true);
   var topBlocks = this.getTopBlocks(true);
   var cursorY = 0;
   for (var i = 0, block; block = topBlocks[i]; i++) {
@@ -714,6 +715,7 @@ Blockly.WorkspaceSvg.prototype.cleanUp_ = function() {
     cursorY = block.getRelativeToSurfaceXY().y +
         block.getHeightWidth().height + Blockly.BlockSvg.MIN_BLOCK_Y;
   }
+  Blockly.Events.setGroup(false);
   // Fire an event to allow scrollbars to resize.
   Blockly.fireUiEvent(window, 'resize');
 };
