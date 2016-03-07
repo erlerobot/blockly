@@ -87,7 +87,7 @@ Blockly.Python['turn_on_blue_led'] = function(block) {
 	code+="if __name__ == '__main__':\n"
 	code+="  ros_nodes = rosnode.get_node_names()\n"
 	code+="  if not '/erle_statusleds' in ros_nodes:\n"
-	code+="    command='python /home/erle/catkin_ws_imu/src/ros_erle_statusled/scripts/statusleds.py'\n"
+	code+="    command='python /home/erle/spider_ws/src/ros_erle_statusled/scripts/statusleds.py'\n"
 	code+="    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
 	code+="  talker()\n"	
 	return code;
@@ -110,5 +110,10 @@ Blockly.Python['get_orientation'] = function(block) {
         var code = "EB2__erle_brain__get_orientation?'"+ow+"'&'"+ox+"'&'"+oy+"'&'"+oz+"'\n";
         return code;
 
+};
+
+Blockly.Python['calibrate_imu'] = function(block) {
+        var code = "EB2__erle_brain__calibrate_imu?\n";
+        return code;
 };
 

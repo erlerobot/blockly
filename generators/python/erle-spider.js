@@ -459,3 +459,9 @@ Blockly.Python['spider_turn_left'] = function(block) {
 	code+="	rate.sleep()\n"
 	return code;
 };
+
+Blockly.Python['spider_turn_right_degrees'] = function(block) {
+        var degrees = block.getFieldValue('DEGREES');
+        var code = "EB2__erle_spider__spider_turn_right_degrees?"+degrees+"\n";
+        return code;
+};
