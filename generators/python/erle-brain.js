@@ -95,32 +95,25 @@ Blockly.Python['turn_on_blue_led'] = function(block) {
 };
 
 Blockly.Python['turn_on_orange_led'] = function(block) {
-    var orange_led = block.getFieldValue('ORANGE_LED');
-    var code = "";
-    code+="#!/usr/bin/python\n"
-    code+="import rospy\n"
-    code+="import time\n"
-    code+="from std_msgs.msg import String\n"
-    code+="\n"
-    code+="def talker():\n"
-    code+="  pub = rospy.Publisher('/statusleds', String, queue_size=10)\n"
-    code+="  rate = rospy.Rate(10)\n"
-    code+="  start = time.time()\n"
-    code+="  flag=True #time flag\n"
-    code+="  led='"+orange_led.toString()+"'\n"
-    code+="  if (led == 'TRUE'):\n"
-    code+="    msg = 'orange'\n"
-    code+="  else:\n"
-    code+="    msg = 'orange_off'\n"
-    code+="  while not rospy.is_shutdown() and flag:\n"
-    code+="    sample_time=time.time()\n"
-    code+="    if ((sample_time - start) > 1):\n"
-    code+="      flag=False\n"
-    code+="    pub.publish(msg)\n"
-    code+="    rate.sleep()\n"
-    code+="if __name__ == '__main__':\n"
-    code+="  talker()\n"
-    return code;
+        var orange_led = block.getFieldValue('ORANGE_LED');
+        var code = "EB2__erle_brain__turn_on_orange_led?'"+orange_led+"'\n";
+        return code;
 
+};
+
+Blockly.Python['get_orientation'] = function(block) {
+        var ow = Blockly.Python.valueToCode(block, 'OrientationW', Blockly.Python.ORDER_ATOMIC);
+        var ox = Blockly.Python.valueToCode(block, 'OrientationX', Blockly.Python.ORDER_ATOMIC);
+        var oy = Blockly.Python.valueToCode(block, 'OrientationY', Blockly.Python.ORDER_ATOMIC);
+        var oz = Blockly.Python.valueToCode(block, 'OrientationZ', Blockly.Python.ORDER_ATOMIC);
+
+        var code = "EB2__erle_brain__get_orientation?'"+ow+"'&'"+ox+"'&'"+oy+"'&'"+oz+"'\n";
+        return code;
+
+};
+
+Blockly.Python['calibrate_imu'] = function(block) {
+        var code = "EB2__erle_brain__calibrate_imu?\n";
+        return code;
 };
 
