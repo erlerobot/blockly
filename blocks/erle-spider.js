@@ -154,3 +154,18 @@ Blockly.Blocks['spider_turn_right_degrees'] = {
     this.setHelpUrl('http://www.erlerobotics.com/');
   }
 };
+
+Blockly.Blocks['spider_turn_left_degrees'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Turn left")
+        .appendField(new Blockly.FieldTextInput("90"), "DEGREES")
+        .appendField("degrees");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.erlerobotics.com/');
+  }
+};
+
