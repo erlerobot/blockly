@@ -85,3 +85,15 @@ Blockly.Blocks['take_a_picture'] = {
     this.setHelpUrl('http://www.erlerobotics.com/');
   }
 };
+
+Blockly.Blocks['calibrate_imu'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Calibrate IMU");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.erlerobotics.com/');
+  }
+};
