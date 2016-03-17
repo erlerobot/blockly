@@ -42,8 +42,6 @@ elif "left" is dropdown_direction:
 elif "right" is dropdown_direction:
  msg.axes[0] = -1
 
-
-
 bo=True
 while not rospy.is_shutdown() and bo:
  sample_time = time.time()
