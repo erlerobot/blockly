@@ -29,7 +29,7 @@ for e in range (0, 17):
 ################
 ##    WALK    ##
 ################ 
-walking_time=float(seconds)
+walking_time=float(seconds)+0.4
 
 start = time.time()
 
