@@ -29,7 +29,7 @@ for e in range (0, 17):
 ################
 ##    WALK    ##
 ################ 
-walking_time=float(seconds)
+walking_time=float(seconds)+0.4
 
 start = time.time()
 
@@ -41,6 +41,8 @@ elif "left" is dropdown_direction:
  msg.axes[0] = 1
 elif "right" is dropdown_direction:
  msg.axes[0] = -1
+
+
 
 bo=True
 while not rospy.is_shutdown() and bo:
