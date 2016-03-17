@@ -45,23 +45,12 @@ Blockly.Blocks['spider_standup_down'] = {
   }
 };
 
-// Blockly.Blocks['spider_sitdown'] = {
-//   init: function() {
-//     this.appendDummyInput()
-//         .appendField("Sit down");
-//     this.setPreviousStatement(true);
-//     this.setNextStatement(true);
-//     this.setColour(260);
-//     this.setTooltip('');
-//     this.setHelpUrl('http://www.erlerobotics.com/');
-//   }
-// };
-
-Blockly.Blocks['spider_forward'] = {
+Blockly.Blocks['spider_walk'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Go forward")
-        .appendField(new Blockly.FieldTextInput("2"), "FORWARD_SECS")
+        .appendField("Walk ")
+        .appendField(new Blockly.FieldDropdown([["Forward", "forward"], ["Backwards", "backwards"], ["Left", "left"], ["Right", "right"]]), "direction")
+        .appendField(new Blockly.FieldTextInput("1"), "WALK_SECS")
         .appendField("seconds");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -71,11 +60,12 @@ Blockly.Blocks['spider_forward'] = {
   }
 };
 
-Blockly.Blocks['spider_backwards'] = {
+Blockly.Blocks['spider_turn'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Go backwards")
-        .appendField(new Blockly.FieldTextInput("3"), "BACKWARDS_SECS")
+        .appendField("Turn ")
+        .appendField(new Blockly.FieldDropdown([["Left", "left"], ["Right", "right"]]), "direction")
+        .appendField(new Blockly.FieldTextInput("1"), "TURN_SECS")
         .appendField("seconds");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -85,81 +75,12 @@ Blockly.Blocks['spider_backwards'] = {
   }
 };
 
-Blockly.Blocks['spider_right'] = {
+Blockly.Blocks['spider_turn_degrees'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Go right")
-        .appendField(new Blockly.FieldTextInput("5"), "RIGHT_SECS")
-        .appendField("seconds");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(260);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
-  }
-};
-
-Blockly.Blocks['spider_left'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Go left")
-        .appendField(new Blockly.FieldTextInput("1"), "LEFT_SECS")
-        .appendField("seconds");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(260);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
-  }
-};
-
-Blockly.Blocks['spider_turn_left'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Turn left")
-        .appendField(new Blockly.FieldTextInput("1"), "TURN_LEFT_SECS")
-        .appendField("seconds");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(260);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
-  }
-};
-
-Blockly.Blocks['spider_turn_right'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Turn right")
-        .appendField(new Blockly.FieldTextInput("1"), "TURN_RIGHT_SECS")
-        .appendField("seconds");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(260);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
-  }
-};
-
-Blockly.Blocks['spider_turn_right_degrees'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Turn right")
-        .appendField(new Blockly.FieldTextInput("90"), "DEGREES")
-        .appendField("degrees");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(260);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
-  }
-};
-
-Blockly.Blocks['spider_turn_left_degrees'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Turn left")
-        .appendField(new Blockly.FieldTextInput("90"), "DEGREES")
+        .appendField("Turn ")
+        .appendField(new Blockly.FieldDropdown([["Left", "left"], ["Right", "right"]]), "direction")
+        .appendField(new Blockly.FieldTextInput("90"), "TURN_DEGREES")
         .appendField("degrees");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
