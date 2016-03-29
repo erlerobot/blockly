@@ -7,7 +7,7 @@ blocks together to build programs.  All code is free and open source.
 
 ![](https://developers.google.com/blockly/sample.png)
 
-The following blocks have been developed by @erlerobotics
+**The following blocks have been developed by @erlerobotics**
 
 ![](http://erlerobotics.com/docs/img/blockly/spider_b.png)
 
