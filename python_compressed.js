@@ -9,7 +9,25 @@ Blockly.Python.ORDER_RELATIONAL=11;Blockly.Python.ORDER_LOGICAL_NOT=12;Blockly.P
 Blockly.Python.init=function(a){Blockly.Python.definitions_=Object.create(null);Blockly.Python.functionNames_=Object.create(null);Blockly.Python.variableDB_?Blockly.Python.variableDB_.reset():Blockly.Python.variableDB_=new Blockly.Names(Blockly.Python.RESERVED_WORDS_);var b=[];a=Blockly.Variables.allVariables(a);for(var c=0;c<a.length;c++)b[c]=Blockly.Python.variableDB_.getName(a[c],Blockly.Variables.NAME_TYPE)+" = None";Blockly.Python.definitions_.variables=b.join("\n")};
 Blockly.Python.finish=function(a){var b=[],c=[],d;for(d in Blockly.Python.definitions_){var e=Blockly.Python.definitions_[d];e.match(/^(from\s+\S+\s+)?import\s+\S+/)?b.push(e):c.push(e)}delete Blockly.Python.definitions_;delete Blockly.Python.functionNames_;Blockly.Python.variableDB_.reset();return(b.join("\n")+"\n\n"+c.join("\n\n")).replace(/\n\n+/g,"\n\n").replace(/\n*$/,"\n\n\n")+a};Blockly.Python.scrubNakedValue=function(a){return a+"\n"};
 Blockly.Python.quote_=function(a){a=a.replace(/\\/g,"\\\\").replace(/\n/g,"\\\n").replace(/\%/g,"\\%").replace(/'/g,"\\'");return"'"+a+"'"};
-Blockly.Python.scrub_=function(a,b){var c="";if(!a.outputConnection||!a.outputConnection.targetConnection){var d=a.getCommentText();d&&(c+=Blockly.Python.prefixLines(d,"# ")+"\n");for(var e=0;e<a.inputList.length;e++)a.inputList[e].type==Blockly.INPUT_VALUE&&(d=a.inputList[e].connection.targetBlock())&&(d=Blockly.Python.allNestedComments(d))&&(c+=Blockly.Python.prefixLines(d,"# "))}e=a.nextConnection&&a.nextConnection.targetBlock();e=Blockly.Python.blockToCode(e);return c+b+e};Blockly.Python.math={};Blockly.Python.addReservedWords("math,random,Number");Blockly.Python.math_number=function(a){a=parseFloat(a.getFieldValue("NUM"));return[a,0>a?Blockly.Python.ORDER_UNARY_SIGN:Blockly.Python.ORDER_ATOMIC]};
+Blockly.Python.scrub_=function(a,b){var c="";if(!a.outputConnection||!a.outputConnection.targetConnection){var d=a.getCommentText();d&&(c+=Blockly.Python.prefixLines(d,"# ")+"\n");for(var e=0;e<a.inputList.length;e++)a.inputList[e].type==Blockly.INPUT_VALUE&&(d=a.inputList[e].connection.targetBlock())&&(d=Blockly.Python.allNestedComments(d))&&(c+=Blockly.Python.prefixLines(d,"# "))}e=a.nextConnection&&a.nextConnection.targetBlock();e=Blockly.Python.blockToCode(e);return c+b+e};/*
+
+
+ Copyright 2015 Erle Robotics
+ http://erlerobotics.com
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+Blockly.Python.control={};Blockly.Python.wait=function(a){a=a.getFieldValue("WAIT_SECS");a="import time\n"+("time.sleep("+a+")\n");return a+="\n"};Blockly.Python.alert=function(a){a=a.getFieldValue("MSG");alert(a);return"#Javascript Alert\n"};Blockly.Python.math={};Blockly.Python.addReservedWords("math,random,Number");Blockly.Python.math_number=function(a){a=parseFloat(a.getFieldValue("NUM"));return[a,0>a?Blockly.Python.ORDER_UNARY_SIGN:Blockly.Python.ORDER_ATOMIC]};
 Blockly.Python.math_arithmetic=function(a){var b={ADD:[" + ",Blockly.Python.ORDER_ADDITIVE],MINUS:[" - ",Blockly.Python.ORDER_ADDITIVE],MULTIPLY:[" * ",Blockly.Python.ORDER_MULTIPLICATIVE],DIVIDE:[" / ",Blockly.Python.ORDER_MULTIPLICATIVE],POWER:[" ** ",Blockly.Python.ORDER_EXPONENTIATION]}[a.getFieldValue("OP")],c=b[0],b=b[1],d=Blockly.Python.valueToCode(a,"A",b)||"0";a=Blockly.Python.valueToCode(a,"B",b)||"0";return[d+c+a,b]};
 Blockly.Python.math_single=function(a){var b=a.getFieldValue("OP"),c;if("NEG"==b)return c=Blockly.Python.valueToCode(a,"NUM",Blockly.Python.ORDER_UNARY_SIGN)||"0",["-"+c,Blockly.Python.ORDER_UNARY_SIGN];Blockly.Python.definitions_.import_math="import math";a="SIN"==b||"COS"==b||"TAN"==b?Blockly.Python.valueToCode(a,"NUM",Blockly.Python.ORDER_MULTIPLICATIVE)||"0":Blockly.Python.valueToCode(a,"NUM",Blockly.Python.ORDER_NONE)||"0";switch(b){case "ABS":c="math.fabs("+a+")";break;case "ROOT":c="math.sqrt("+
 a+")";break;case "LN":c="math.log("+a+")";break;case "LOG10":c="math.log10("+a+")";break;case "EXP":c="math.exp("+a+")";break;case "POW10":c="math.pow(10,"+a+")";break;case "ROUND":c="round("+a+")";break;case "ROUNDUP":c="math.ceil("+a+")";break;case "ROUNDDOWN":c="math.floor("+a+")";break;case "SIN":c="math.sin("+a+" / 180.0 * math.pi)";break;case "COS":c="math.cos("+a+" / 180.0 * math.pi)";break;case "TAN":c="math.tan("+a+" / 180.0 * math.pi)"}if(c)return[c,Blockly.Python.ORDER_FUNCTION_CALL];switch(b){case "ASIN":c=
@@ -47,25 +65,7 @@ e+")");"LAST"==d||"FROM_END"==d&&"1"==a?a="":"FROM_START"==c?a=Blockly.isNumber(
 Blockly.Python.text_changeCase=function(a){var b={UPPERCASE:".upper()",LOWERCASE:".lower()",TITLECASE:".title()"}[a.getFieldValue("CASE")];return[(Blockly.Python.valueToCode(a,"TEXT",Blockly.Python.ORDER_MEMBER)||"''")+b,Blockly.Python.ORDER_MEMBER]};Blockly.Python.text_trim=function(a){var b={LEFT:".lstrip()",RIGHT:".rstrip()",BOTH:".strip()"}[a.getFieldValue("MODE")];return[(Blockly.Python.valueToCode(a,"TEXT",Blockly.Python.ORDER_MEMBER)||"''")+b,Blockly.Python.ORDER_MEMBER]};
 Blockly.Python.text_print=function(a){return"print("+(Blockly.Python.valueToCode(a,"TEXT",Blockly.Python.ORDER_NONE)||"''")+")\n"};
 Blockly.Python.text_prompt_ext=function(a){var b=Blockly.Python.provideFunction_("text_prompt",["def "+Blockly.Python.FUNCTION_NAME_PLACEHOLDER_+"(msg):","  try:","    return raw_input(msg)","  except NameError:","    return input(msg)"]),c=a.getField("TEXT")?Blockly.Python.quote_(a.getFieldValue("TEXT")):Blockly.Python.valueToCode(a,"TEXT",Blockly.Python.ORDER_NONE)||"''",b=b+"("+c+")";"NUMBER"==a.getFieldValue("TYPE")&&(b="float("+b+")");return[b,Blockly.Python.ORDER_FUNCTION_CALL]};
-Blockly.Python.text_prompt=Blockly.Python.text_prompt_ext;/*
-
-
- Copyright 2015 Erle Robotics
- http://erlerobotics.com
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-*/
-Blockly.Python.rover={};Blockly.Python.rover_mode=function(a){a=a.getFieldValue("MODE");var b;b="import rospy\nfrom mavros_msgs.srv import SetMode\n";b+="rospy.wait_for_service('/mavros/set_mode')\n";b+="try:\n";b+=" change_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)\n";b+=" mode='"+a.toString()+"'\n";b+=" resp1 = change_mode(0,mode)\n";b+="except rospy.ServiceException as e:\n";b+=' print ("Service call failed: %s" %e\n )';return b+="\n"};
+Blockly.Python.text_prompt=Blockly.Python.text_prompt_ext;Blockly.Python.rover={};Blockly.Python.rover_mode=function(a){a=a.getFieldValue("MODE");var b;b="import rospy\nfrom mavros_msgs.srv import SetMode\n";b+="rospy.wait_for_service('/mavros/set_mode')\n";b+="try:\n";b+=" change_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)\n";b+=" mode='"+a.toString()+"'\n";b+=" resp1 = change_mode(0,mode)\n";b+="except rospy.ServiceException as e:\n";b+=' print ("Service call failed: %s" %e\n )';return b+="\n"};
 Blockly.Python.rover_forward=function(a){var b=a.getFieldValue("SPEED");a=Blockly.Python.valueToCode(a,"TIME",Blockly.Python.ORDER_ATOMIC);var c;c="import rospy\nimport time\n";c+="from mavros_msgs.msg import OverrideRCIn\n";c+="from mavros_msgs.srv import SetMode\n";c+="throttle_channel=2\n";c+="steer_channel=0";c+="def talker():\n";c+=" pub = rospy.Publisher('mavros/rc/override', OverrideRCIn, queue_size=10)\n";c+=" r = rospy.Rate(10) #10hz\n";c+=" msg = OverrideRCIn()\n";c+=" start = time.time()\n";
 c+=" speed='"+b.toString()+"'\n";c+=" exec_time="+a.toString()+"\n";c+=" flag=True #time flag\n";c+=" msg.channels[steer_channel]=1370\n";c+=" if speed =='SLOW':\n";c+="  msg.channels[throttle_channel]=1560\n";c+=" elif speed =='NORMAL':\n";c+="  msg.channels[throttle_channel]=1565\n";c+=" elif speed == 'FAST':\n";c+="  msg.channels[throttle_channel]=1570\n";c+=" while not rospy.is_shutdown() and flag:\n";c+="  sample_time=time.time()\n";c+="  if ((sample_time - start) > exec_time):\n";c+="   flag=False\n";
 c+="  rospy.loginfo(msg)\n";c+="  pub.publish(msg)\n";c+="  r.sleep()\n";c+="if __name__ == '__main__':\n";c+=" rospy.wait_for_service('/mavros/set_mode')\n";c+=" change_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)\n";c+=" resp1 = change_mode(custom_mode='manual')\n";c+=" print (resp1)\n";c+=" if 'True' in str(resp1):\n";c+="  try:\n";c+="   talker()\n";c+="  except rospy.ROSInterruptException: pass\n";return c+="\n"};
@@ -114,4 +114,4 @@ Blockly.Python.controls_for=function(a){var b=Blockly.Python.variableDB_.getName
 ["def "+Blockly.Python.FUNCTION_NAME_PLACEHOLDER_+"(start, stop, step):","  while start <= stop:","    yield start","    start += abs(step)"])},k=function(){return Blockly.Python.provideFunction_("downRange",["def "+Blockly.Python.FUNCTION_NAME_PLACEHOLDER_+"(start, stop, step):","  while start >= stop:","    yield start","    start -= abs(step)"])};a=function(a,b,c){return"("+a+" <= "+b+") and "+h()+"("+a+", "+b+", "+c+") or "+k()+"("+a+", "+b+", "+c+")"};if(Blockly.isNumber(c)&&Blockly.isNumber(d)&&
 Blockly.isNumber(e))c=parseFloat(c),d=parseFloat(d),e=Math.abs(parseFloat(e)),0===c%1&&0===d%1&&0===e%1?(c<=d?(d++,a=0==c&&1==e?d:c+", "+d,1!=e&&(a+=", "+e)):(d--,a=c+", "+d+", -"+e),a="range("+a+")"):(a=c<d?h():k(),a+="("+c+", "+d+", "+e+")");else{var l=function(a,c){if(Blockly.isNumber(a))a=parseFloat(a);else if(a.match(/^\w+$/))a="float("+a+")";else{var d=Blockly.Python.variableDB_.getDistinctName(b+c,Blockly.Variables.NAME_TYPE);f+=d+" = float("+a+")\n";a=d}return a},c=l(c,"_start"),d=l(d,"_end");
 l(e,"_inc");a="number"==typeof c&&"number"==typeof d?c<d?h(c,d,e):k(c,d,e):a(c,d,e)}return f+="for "+b+" in "+a+":\n"+g};Blockly.Python.controls_forEach=function(a){var b=Blockly.Python.variableDB_.getName(a.getFieldValue("VAR"),Blockly.Variables.NAME_TYPE),c=Blockly.Python.valueToCode(a,"LIST",Blockly.Python.ORDER_RELATIONAL)||"[]",d=Blockly.Python.statementToCode(a,"DO"),d=Blockly.Python.addLoopTrap(d,a.id)||Blockly.Python.PASS;return"for "+b+" in "+c+":\n"+d};
-Blockly.Python.controls_flow_statements=function(a){switch(a.getFieldValue("FLOW")){case "BREAK":return"break\n";case "CONTINUE":return"continue\n"}throw"Unknown flow statement.";};
+Blockly.Python.controls_flow_statements=function(a){switch(a.getFieldValue("FLOW")){case "BREAK":return"break\n";case "CONTINUE":return"continue\n"}throw"Unknown flow statement.";};Blockly.Python.for_time=function(a){var b=a.getFieldValue("SECONDS_WHILE"),c=Blockly.Python.statementToCode(a,"DO"),c=Blockly.Python.addLoopTrap(c,a.id)||Blockly.Python.PASS;a="import time\n"+("t_end = time.time()+"+b+"\n");return a+="while time.time() < t_end:\n"+c+"\n"};Blockly.Python.code={};Blockly.Python.run_code=function(a){a=a.getFieldValue("CODE_TEXT");return a=""+(""+a+"\n")+"\n"};
