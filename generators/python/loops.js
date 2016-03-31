@@ -209,3 +209,15 @@ Blockly.Python['controls_flow_statements'] = function(block) {
   }
   throw 'Unknown flow statement.';
 };
+
+Blockly.Python['for_time'] = function(block) {
+    var seconds = block.getFieldValue('SECONDS_WHILE');
+    var branch = Blockly.Python.statementToCode(block, 'DO');
+    branch = Blockly.Python.addLoopTrap(branch, block.id) ||
+    Blockly.Python.PASS;
+    var code = "";
+    code+="import time\n"
+    code+="t_end = time.time()+"+seconds+"\n"
+    code+="while time.time() < t_end:\n"+branch+"\n"
+    return code;
+};
