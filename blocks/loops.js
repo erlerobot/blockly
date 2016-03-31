@@ -281,3 +281,20 @@ Blockly.Blocks['controls_flow_statements'] = {
   LOOP_TYPES: ['controls_repeat', 'controls_repeat_ext', 'controls_forEach',
       'controls_for', 'controls_whileUntil']
 };
+
+Blockly.Blocks['for_time'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("For")
+        .appendField(new Blockly.FieldTextInput("2"), "SECONDS_WHILE")
+        .appendField("seconds");
+    this.appendStatementInput("DO")
+        .setCheck(null)
+        .appendField(Blockly.Msg.CONTROLS_WHILEUNTIL_INPUT_DO);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.erlerobotics.com/');
+  }
+};
