@@ -36,7 +36,6 @@ if B_up > 255:B_up=255
 if G_up > 255:G_up=255
 if R_up > 255:R_up=255
 
-
 ros_nodes = rosnode.get_node_names()
 if '/raspicam_node' in ros_nodes:
     command='rosservice call /camera/start_capture'
@@ -47,20 +46,6 @@ else:
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 
 ros_data = rospy.wait_for_message('/camera/image/compressed', CompressedImage, timeout=5)
-
-
-'''ros_nodes = rosnode.get_node_names()
-command=""
-if not '/camera/image/compressed' in ros_nodes:
-    command+="/home/erle/ros_catkin_ws/install_isolated/camera.sh;"
-
-command+="rosservice call /camera/start_capture"
-process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-
-ros_data = rospy.wait_for_message('/camera/image/compressed', CompressedImage, timeout=3)
-'''
-
-
 
 #### direct conversion to CV3 ####
 np_arr = np.fromstring(ros_data.data, np.uint8)
@@ -87,7 +72,7 @@ npImg = np.asarray( cvImg )
 coordList = np.argwhere( npImg >0 )
 numWhitePoints = len( coordList )
 
-if numWhitePoints > 3000: #lower limit
+if numWhitePoints > 1000: #lower limit
     X=0;Y=0
     for (x,y) in coordList:
         X+=x
@@ -101,10 +86,9 @@ if numWhitePoints > 3000: #lower limit
 
     X_center=Y_C;Y_center=X_C #fix axes	
 
-    ## DEBUG
-    print("Center point: "+str(X_center)+","+str(Y_center))
-    cv2.circle(image,(X_center,Y_center), 20, (0,255,0), -1)
-    cv2.imwrite("image_center.jpg", image);
+    #DEBUG#print("Center point: "+str(X_center)+","+str(Y_center))
+    #DEBUG#cv2.circle(image,(X_center,Y_center), 20, (0,255,0), -1)
+    #DEBUG#cv2.imwrite("image_center.jpg", image);
 
 
     ##### PRINT LOCATION #####
@@ -123,7 +107,7 @@ if numWhitePoints > 3000: #lower limit
 else:
     print("Not enough sample color")
     color_location = -1
-    cv2.imwrite("image_NO_center.jpg", image);
+    #DEBUG#cv2.imwrite("image_NO_center.jpg", image);#DEBUG
 
 command="rosservice call /camera/stop_capture"
 process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
