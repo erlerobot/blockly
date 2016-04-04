@@ -44,7 +44,7 @@ Blockly.Blocks['turn_on_blue_led'] = {
     this.setNextStatement(true);
     this.setColour(0);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -58,7 +58,7 @@ Blockly.Blocks['turn_on_orange_led'] = {
     this.setNextStatement(true);
     this.setColour(0);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -70,7 +70,7 @@ Blockly.Blocks['get_laser'] = {
     this.setNextStatement(true);
     this.setColour(0);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');
   }
 };
 
@@ -82,7 +82,7 @@ Blockly.Blocks['take_a_picture'] = {
     this.setNextStatement(true);
     this.setColour(0);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -94,6 +94,22 @@ Blockly.Blocks['calibrate_imu'] = {
     this.setNextStatement(true);
     this.setColour(0);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
+  }
+};
+
+Blockly.Blocks['camera_color_location'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Camera get")
+        .appendField(new Blockly.FieldColour("#ff0000"), "COLOR");
+    this.appendValueInput("LOCATION")
+        .setCheck(null)
+        .appendField("color location");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };

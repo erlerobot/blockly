@@ -41,7 +41,7 @@ Blockly.Blocks['spider_standup_down'] = {
     this.setNextStatement(true);
     this.setColour(260);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -56,7 +56,7 @@ Blockly.Blocks['spider_walk'] = {
     this.setNextStatement(true);
     this.setColour(260);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -71,7 +71,7 @@ Blockly.Blocks['spider_turn'] = {
     this.setNextStatement(true);
     this.setColour(260);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -86,6 +86,6 @@ Blockly.Blocks['spider_turn_degrees'] = {
     this.setNextStatement(true);
     this.setColour(260);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_2_Erle-Spider_Turn_degrees_block.html');
   }
 };

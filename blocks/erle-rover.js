@@ -40,7 +40,7 @@ Blockly.Blocks['rover_mode'] = {
     this.setNextStatement(true);
     this.setColour(60);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -54,7 +54,7 @@ Blockly.Blocks['rover_forward'] = {
     this.setNextStatement(true, null);
     this.setColour(60);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 
 };
@@ -73,7 +73,7 @@ Blockly.Blocks['rover_steering'] = {
     this.setNextStatement(true, "String");
     this.setColour(65);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -92,7 +92,7 @@ Blockly.Blocks['rover_control'] = {
     this.setNextStatement(true, null);
     this.setColour(65);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 

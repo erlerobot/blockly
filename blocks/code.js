@@ -44,6 +44,6 @@ Blockly.Blocks['run_code'] = {
     this.setNextStatement(true);
     this.setColour(160);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };

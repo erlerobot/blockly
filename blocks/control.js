@@ -45,7 +45,7 @@ Blockly.Blocks['wait'] = {
     this.setNextStatement(true);
     this.setColour(180);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -58,6 +58,6 @@ Blockly.Blocks['alert'] = {
     this.setNextStatement(true);
     this.setColour(180);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
