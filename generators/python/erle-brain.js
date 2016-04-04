@@ -137,3 +137,23 @@ Blockly.Python['calibrate_imu'] = function(block) {
 	code+="    time.sleep(10)\n"
 	return code;
 };
+
+
+
+Blockly.Python['camera_color_location'] = function(block) {
+    var color = block.getFieldValue('COLOR');
+    var varName_location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+
+    var hex = color.replace(/[^0-9A-F]/gi, '');
+    var bigint = parseInt(hex, 16);
+    var r = (bigint >> 16) & 255;
+    var g = (bigint >> 8) & 255;
+    var b = bigint & 255;
+    var colorBGR = [b, g, r].join();
+
+    var code = "";
+    code += "colorBGR = \"" + colorBGR.toString() + "\"\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/color_location.py");
+    return code + varName_location + " = color_location\n"
+
+};
