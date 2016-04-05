@@ -1,6 +1,5 @@
 # Python libs
 import sys, time
-#sys.path.append("/usr/lib/python2.7/dist-packages")
 
 # numpy and scipy
 import numpy as np
@@ -47,7 +46,7 @@ else:
 
 ros_data = rospy.wait_for_message('/camera/image/compressed', CompressedImage, timeout=5)
 
-#### direct conversion to CV3 ####
+#### direct conversion to CV2 ####
 np_arr = np.fromstring(ros_data.data, np.uint8)
 image = cv2.imdecode(np_arr, 1) #cv2.CV_LOAD_IMAGE_COLOR
 
@@ -72,7 +71,7 @@ npImg = np.asarray( cvImg )
 coordList = np.argwhere( npImg >0 )
 numWhitePoints = len( coordList )
 
-if numWhitePoints > 1000: #lower limit
+if numWhitePoints > 2500: #lower limit
     X=0;Y=0
     for (x,y) in coordList:
         X+=x
@@ -86,10 +85,10 @@ if numWhitePoints > 1000: #lower limit
 
     X_center=Y_C;Y_center=X_C #fix axes	
 
-    #DEBUG#print("Center point: "+str(X_center)+","+str(Y_center))
-    #DEBUG#cv2.circle(image,(X_center,Y_center), 20, (0,255,0), -1)
-    #DEBUG#cv2.imwrite("image_center.jpg", image);
-
+    #DEBUG# Write the image with a circle in the center of the color.
+    #DEBUG# print("Center point: "+str(X_center)+","+str(Y_center))
+    #DEBUG# cv2.circle(image,(X_center,Y_center), 20, (0,255,0), -1)
+    #DEBUG# cv2.imwrite("image_center.jpg", image);
 
     ##### PRINT LOCATION #####
     #print("Image height="+str(height)+", Image width="+str(width))
@@ -107,7 +106,8 @@ if numWhitePoints > 1000: #lower limit
 else:
     print("Not enough sample color")
     color_location = -1
-    #DEBUG#cv2.imwrite("image_NO_center.jpg", image);#DEBUG
+    #DEBUG# Write the image
+    #DEBUG# cv2.imwrite("image_NO_center.jpg", image);
 
 command="rosservice call /camera/stop_capture"
 process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)

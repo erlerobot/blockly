@@ -45,17 +45,15 @@ Blockly.Python['get_laser'] = function(block) {
 
 Blockly.Python['take_a_picture'] = function(block) {
 
+    window.open(
+        '/pages/images/imageViewer.html',
+        '_blank' // <- This is what makes it open in a new window.
+    );
+
     var code = "";
-    code+="import rospy\n"
-    code+="import subprocess\n"
-    code+="import rosnode\n"
-    code+="ros_nodes = rosnode.get_node_names()\n"
-    code+="if '/raspicam_node' in ros_nodes:\n"
-    code+="  command='rosservice call /camera/start_capture'\n"
-    code+="  process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
-    code+="command='python2 /home/erle/take_a_picture.py'\n"
-    code+="process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/take_a_picture.py");
     return code;
+
 };
 
 Blockly.Python['turn_on_blue_led'] = function(block) {
