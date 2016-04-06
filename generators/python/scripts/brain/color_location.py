@@ -100,7 +100,7 @@ if numWhitePoints > 2000: #lower limit
         color_location = (-1)*((Xnew_center)*10)/(width/2)
 
 else:
-    print("Not enough szample color")
+    print("Not enough sample color")
     color_location = None
     #DEBUG# Write the image
     #DEBUG# cv2.imwrite("image_NO_center.jpg", image);
