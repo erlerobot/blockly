@@ -48,16 +48,3 @@ Blockly.Blocks['wait'] = {
     this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
-
-Blockly.Blocks['alert'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Alert ")
-        .appendField(new Blockly.FieldTextInput("!"), "MSG");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(180);
-    this.setTooltip('');
-    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
-  }
-};
