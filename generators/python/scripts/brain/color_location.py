@@ -71,7 +71,7 @@ npImg = np.asarray( cvImg )
 coordList = np.argwhere( npImg >0 )
 numWhitePoints = len( coordList )
 
-if numWhitePoints > 2500: #lower limit
+if numWhitePoints > 2000: #lower limit
     X=0;Y=0
     for (x,y) in coordList:
         X+=x
@@ -93,19 +93,15 @@ if numWhitePoints > 2500: #lower limit
     ##### PRINT LOCATION #####
     #print("Image height="+str(height)+", Image width="+str(width))
 
-    if X_center < (width/3):
-        print("LEFT")
-        color_location = 0
-    elif X_center > (width/3*2):
-        print("RIGTH")
-        color_location = 1
-    else:
-        print("CENTER")
-        color_location = 2
+    if X_center >= width/2: # RIGHT from 0 to +10
+        color_location = ((X_center - (width/2))*10)/(width/2)
+    else: #LEFT from 0 to -10
+        Xnew_center = (width/2) - X_center
+        color_location = (-1)*((Xnew_center)*10)/(width/2)
 
 else:
-    print("Not enough sample color")
-    color_location = -1
+    print("Not enough szample color")
+    color_location = None
     #DEBUG# Write the image
     #DEBUG# cv2.imwrite("image_NO_center.jpg", image);
 
