@@ -36,11 +36,3 @@ Blockly.Python['wait'] = function(block) {
     code+="\n"
     return code;
 };
-
-Blockly.Python['alert'] = function(block) {
-    var msg = block.getFieldValue('MSG');
-    alert(msg);
-    var code = "#Javascript Alert";
-    code+="\n"
-    return code;
-};
