@@ -45,17 +45,15 @@ Blockly.Python['get_laser'] = function(block) {
 
 Blockly.Python['take_a_picture'] = function(block) {
 
+    window.open(
+        '/pages/images/imageViewer.html',
+        '_blank' // <- This is what makes it open in a new window.
+    );
+
     var code = "";
-    code+="import rospy\n"
-    code+="import subprocess\n"
-    code+="import rosnode\n"
-    code+="ros_nodes = rosnode.get_node_names()\n"
-    code+="if '/raspicam_node' in ros_nodes:\n"
-    code+="  command='rosservice call /camera/start_capture'\n"
-    code+="  process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
-    code+="command='python2 /home/erle/take_a_picture.py'\n"
-    code+="process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/take_a_picture.py");
     return code;
+
 };
 
 Blockly.Python['turn_on_blue_led'] = function(block) {
@@ -136,4 +134,24 @@ Blockly.Python['calibrate_imu'] = function(block) {
 	code+="    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
 	code+="    time.sleep(10)\n"
 	return code;
+};
+
+
+
+Blockly.Python['camera_color_location'] = function(block) {
+    var color = block.getFieldValue('COLOR');
+    var varName_location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
+
+    var hex = color.replace(/[^0-9A-F]/gi, '');
+    var bigint = parseInt(hex, 16);
+    var r = (bigint >> 16) & 255;
+    var g = (bigint >> 8) & 255;
+    var b = bigint & 255;
+    var colorBGR = [b, g, r].join();
+
+    var code = "";
+    code += "colorBGR = \"" + colorBGR.toString() + "\"\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/color_location.py");
+    return code + varName_location + " = color_location\n"
+
 };
