@@ -39,7 +39,7 @@ Blockly.Python['get_laser'] = function(block) {
     code+="ros_nodes = rosnode.get_node_names()\n"
     code+="if not '/lrm30_node' in ros_nodes:\n"
     code+="  rospack = rospkg.RosPack()\n"
-    code+="  command= rospack.get_path('lrm30_ros') + '/lrm30'\n"
+    code+="  command = rospack.get_path('lrm30_ros').replace('share', 'lib') + '/lrm30'\n"
     code+="  process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
     code+="msg_laser = rospy.wait_for_message('/lrm30_data', Range, timeout=1)\n"
     return code + varName + " = msg_laser.range\n"
