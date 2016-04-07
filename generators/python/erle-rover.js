@@ -202,3 +202,10 @@ Blockly.Python['rover_control'] = function(block) {
   code+="\n"
   return code;
 };
+
+Blockly.Python['rover_avoid_obstacles'] = function(block) {
+    var code = "\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/rover/avoid_obstacles.py");
+    return code;
+
+};
