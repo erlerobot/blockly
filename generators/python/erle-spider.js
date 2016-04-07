@@ -119,3 +119,10 @@ Blockly.Python['spider_turn_degrees'] = function(block) {
     return code;
 
 };
+
+Blockly.Python['spider_avoid_obstacles'] = function(block) {
+    var code = "\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/spider/avoid_obstacles.py");
+    return code;
+
+};
