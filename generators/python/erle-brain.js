@@ -138,8 +138,6 @@ Blockly.Python['calibrate_imu'] = function(block) {
 	return code;
 };
 
-
-
 Blockly.Python['camera_color_location'] = function(block) {
     var color = block.getFieldValue('COLOR');
     var varName_location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
@@ -156,4 +154,21 @@ Blockly.Python['camera_color_location'] = function(block) {
     code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/color_location.py");
     return code + varName_location + " = color_location\n"
 
+};
+
+Blockly.Python['start_hokuyo_laser'] = function(block) {
+    var code = "";
+    code+="import rosnode\n"
+    code+="import subprocess\n"
+    code+="import time\n"
+    code+="import os\n"
+    code+="\n"
+    code+="ros_nodes = rosnode.get_node_names()\n"
+    code+="if not '/urg_node' in ros_nodes:\n"
+    code+="    os.system('ifconfig eth0 192.168.0.2')\n"
+    code+="    command='rosrun urg_node urg_node'\n"
+    code+="    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
+    //code+="    os.system('roslaunch sick_tim sick_tim571_2050101.launch')\n"
+    code+="    time.sleep(10)\n"
+    return code;
 };
