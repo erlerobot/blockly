@@ -125,3 +125,15 @@ Blockly.Blocks['start_hokuyo_laser'] = {
     this.setHelpUrl('http://www.erlerobotics.com/');
   }
 };
+
+Blockly.Blocks['start_sick_laser'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Start SICK Laser");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.erlerobotics.com/');
+  }
+};

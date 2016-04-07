@@ -172,3 +172,20 @@ Blockly.Python['start_hokuyo_laser'] = function(block) {
     code+="    time.sleep(10)\n"
     return code;
 };
+
+Blockly.Python['start_sick_laser'] = function(block) {
+    var code = "";
+    code+="import rosnode\n"
+    code+="import subprocess\n"
+    code+="import time\n"
+    code+="import os\n"
+    code+="\n"
+    code+="ros_nodes = rosnode.get_node_names()\n"
+    code+="if not '/robot_state_publisher' in ros_nodes:\n"
+    code+="    os.system('ifconfig eth0 192.168.0.2')\n"
+    code+="    command='roslaunch sick_tim sick_tim571_2050101.launch'\n"
+    code+="    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
+    //code+="    os.system('roslaunch sick_tim sick_tim571_2050101.launch')\n"
+    code+="    time.sleep(10)\n"
+    return code;
+};
