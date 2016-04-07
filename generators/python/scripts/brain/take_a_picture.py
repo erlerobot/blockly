@@ -36,7 +36,6 @@ cv2.imwrite(images_path+ 'image_' + timestr, image_np)
 files = len(os.listdir(images_path)) #amount of files in /frontend/images/ folder
 
 if files > 7 : #allow 5 images max
-    print("Intentando eliminar")
     os.system("find "+images_path+" -name '*.png' | xargs ls -t | tail -n 1 | xargs rm")#remove oldest image
 
 command="rosservice call /camera/stop_capture"
