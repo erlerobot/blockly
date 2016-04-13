@@ -137,3 +137,15 @@ Blockly.Blocks['start_sick_laser'] = {
     this.setHelpUrl('http://www.erlerobotics.com/');
   }
 };
+
+Blockly.Blocks['start_slam'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Start slam");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
+  }
+};

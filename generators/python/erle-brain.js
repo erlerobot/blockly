@@ -114,3 +114,16 @@ Blockly.Python['start_sick_laser'] = function(block) {
     return code;
 
 };
+
+Blockly.Python['start_slam'] = function(block) {
+
+
+    window.open(
+        '/pages/maps/imageViewer.html',
+        '_blank' // <- This is what makes it open in a new window.
+    );
+    var code = "";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/start_slam.py");
+    return code;
+
+};
