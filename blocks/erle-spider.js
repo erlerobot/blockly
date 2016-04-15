@@ -92,8 +92,8 @@ Blockly.Blocks['spider_turn_degrees'] = {
 
 Blockly.Blocks['spider_avoid_obstacles'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField("Avoid Obstacles");
+    this.appendValueInput("path_angle")
+        .appendField("Find path");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(260);
