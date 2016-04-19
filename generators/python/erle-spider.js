@@ -61,13 +61,15 @@ Blockly.Python['spider_turn'] = function(block) {
 };
 
 Blockly.Python['spider_turn_degrees'] = function(block) {
-    var degrees = block.getFieldValue('TURN_DEGREES');
+
     var dropdown_direction = block.getFieldValue('direction');
     var value_direction = Blockly.Python.valueToCode(block, 'direction', Blockly.Python.ORDER_ATOMIC);
 
+    var degrees_direction = Blockly.Python.valueToCode(block, 'TURN_DEGREES', Blockly.Python.ORDER_ATOMIC);
+
     var code = "";
     code += "dropdown_direction = \"" + dropdown_direction.toString() + "\"\n";
-    code += "degrees = \"" + degrees.toString() + "\"\n";
+    code += "degrees = " + degrees_direction.toString() + "\n";
     code += Blockly.readPythonFile("../blockly/generators/python/scripts/spider/turn_degrees.py");
     return code;
 
