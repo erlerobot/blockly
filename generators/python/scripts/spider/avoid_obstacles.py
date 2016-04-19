@@ -86,13 +86,12 @@ for (j,w) in enumerate(valid_ranges): #w is a tuple of [i,r]
             path_size = 0
     '''elif w[1] <= obstacle_distance:
         stop = 1
-        print("STOP - "+str(j)+" "+str(w[1]))
-
-        #detectar fallo y paralelo a la pared?'''
+        print("STOP - "+str(j)+" "+str(w[1]))'''
 
 
 path_center = (MAX_path_end+MAX_path_beg)/2
 path_center_degrees = path_center*angle_increment*rad_to_deg
+
 '''
 print("NEW ITERATION")
 print("MAX_path_size="+str(MAX_path_size))
@@ -101,9 +100,7 @@ print("MAX_path_end="+str(MAX_path_end))
 print("Path center="+str(path_center))
 print("DEGREES path_center="+str(path_center_degrees))
 print("\n")
-'''
 
-'''
 if stop == 0:
     if path_center_degrees > (mid_angle -25) and path_center_degrees < (mid_angle +25):
         print("GOING FORWARD")
