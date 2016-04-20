@@ -80,8 +80,10 @@ Blockly.Blocks['spider_turn_degrees'] = {
     this.appendDummyInput()
         .appendField("Turn ")
         .appendField(new Blockly.FieldDropdown([["Left", "left"], ["Right", "right"]]), "direction")
-        .appendField(new Blockly.FieldTextInput("90"), "TURN_DEGREES")
-        .appendField("degrees");
+    this.appendValueInput("TURN_DEGREES")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("degrees");   
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(260);

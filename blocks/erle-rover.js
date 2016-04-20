@@ -44,39 +44,6 @@ Blockly.Blocks['rover_mode'] = {
   }
 };
 
-Blockly.Blocks['rover_forward'] = {
-  init: function() {
-    this.appendValueInput("TIME")
-        .setCheck("Number")
-        .appendField(new Blockly.FieldDropdown([["SLOW", "SLOW"], ["NORMAL", "NORMAL"], ["FAST", "FAST"]]), "SPEED")
-        .appendField("seconds");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(60);
-    this.setTooltip('');
-    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
-  }
-
-};
-
-
-Blockly.Blocks['rover_steering'] = {
-  init: function() {
-    this.appendDummyInput()
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(new Blockly.FieldDropdown([["RIGHT", "RIGHT"], ["LEFT", "LEFT"], ["STRAIGHT", "STRAIGHT"]]), "direction")
-
-    this.appendDummyInput()
-        .appendField("Direction");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, "String");
-    this.setNextStatement(true, "String");
-    this.setColour(65);
-    this.setTooltip('');
-    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
-  }
-};
-
 Blockly.Blocks['rover_control'] = {
   init: function() {
     this.appendDummyInput()
@@ -95,4 +62,3 @@ Blockly.Blocks['rover_control'] = {
     this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
-

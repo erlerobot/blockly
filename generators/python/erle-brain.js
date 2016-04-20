@@ -30,19 +30,11 @@ goog.require('Blockly.Python');
 Blockly.Python['get_laser'] = function(block) {
 
     var varName = Blockly.Python.valueToCode(block, 'laser', Blockly.Python.ORDER_ATOMIC);
+
     var code = "";
-    code+="import rospy\n"
-    code+="import subprocess\n"
-    code+="import rosnode\n"
-    code+="import rospkg\n"
-    code+="from sensor_msgs.msg import Range\n"
-    code+="ros_nodes = rosnode.get_node_names()\n"
-    code+="if not '/lrm30_node' in ros_nodes:\n"
-    code+="  rospack = rospkg.RosPack()\n"
-    code+="  command = rospack.get_path('lrm30_ros').replace('share', 'lib') + '/lrm30'\n"
-    code+="  process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
-    code+="msg_laser = rospy.wait_for_message('/lrm30_data', Range, timeout=1)\n"
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/get_laser.py");
     return code + varName + " = msg_laser.range\n"
+
 };
 
 Blockly.Python['take_a_picture'] = function(block) {
@@ -59,88 +51,37 @@ Blockly.Python['take_a_picture'] = function(block) {
 };
 
 Blockly.Python['turn_on_blue_led'] = function(block) {
+
 	var blue_led = block.getFieldValue('BLUE_LED');
-	var code = "";
-	code+="#!/usr/bin/python\n"
-	code+="import rospy\n"
-	code+="import time\n"
-	code+="import rosnode\n"
-	code+="import subprocess\n"
-	code+="from std_msgs.msg import String\n"
-	code+="\n"
-	code+="def talker():\n"
-	code+="  pub = rospy.Publisher('/statusleds', String, queue_size=10)\n"
-	code+="  rate = rospy.Rate(10)\n"
-	code+="  start = time.time()\n"
-	code+="  flag=True #time flag\n"
-	code+="  led='"+blue_led.toString()+"'\n"
-	code+="  if (led == 'TRUE'):\n"
-	code+="    msg = 'blue'\n"
-	code+="  else:\n"
-	code+="    msg = 'blue_off'\n"
-	code+="  while not rospy.is_shutdown() and flag:\n"
-	code+="    sample_time=time.time()\n"
-	code+="    if ((sample_time - start) > 1):\n"
-	code+="      flag=False\n"
-	code+="    pub.publish(msg)\n"
-	code+="    rate.sleep()\n"
-	code+="if __name__ == '__main__':\n"
-	code+="  ros_nodes = rosnode.get_node_names()\n"
-	code+="  if not '/erle_statusleds' in ros_nodes:\n"
-	code+="    command='python /home/erle/spider_ws/src/ros_erle_statusled/scripts/statusleds.py'\n"
-	code+="    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
-	code+="  talker()\n"	
-	return code;
+
+    var code = "";
+    code += "blue_led = \"" + blue_led.toString() + "\"\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/blue_led.py");
+    return code;
 
 };
 
 Blockly.Python['turn_on_orange_led'] = function(block) {
+
     var orange_led = block.getFieldValue('ORANGE_LED');
+
     var code = "";
-    code+="#!/usr/bin/python\n"
-    code+="import rospy\n"
-    code+="import time\n"
-    code+="from std_msgs.msg import String\n"
-    code+="\n"
-    code+="def talker():\n"
-    code+="  pub = rospy.Publisher('/statusleds', String, queue_size=10)\n"
-    code+="  rate = rospy.Rate(10)\n"
-    code+="  start = time.time()\n"
-    code+="  flag=True #time flag\n"
-    code+="  led='"+orange_led.toString()+"'\n"
-    code+="  if (led == 'TRUE'):\n"
-    code+="    msg = 'orange'\n"
-    code+="  else:\n"
-    code+="    msg = 'orange_off'\n"
-    code+="  while not rospy.is_shutdown() and flag:\n"
-    code+="    sample_time=time.time()\n"
-    code+="    if ((sample_time - start) > 1):\n"
-    code+="      flag=False\n"
-    code+="    pub.publish(msg)\n"
-    code+="    rate.sleep()\n"
-    code+="if __name__ == '__main__':\n"
-    code+="  talker()\n"
+    code += "orange_led = \"" + orange_led.toString() + "\"\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/orange_led.py");
     return code;
 
 };
 
 Blockly.Python['calibrate_imu'] = function(block) {
+    
     var code = "";
-	code+="import rosnode\n"
-	code+="import subprocess\n"
-	code+="import time\n"
-	code+="\n"
-	code+="ros_nodes = rosnode.get_node_names()\n"
-	code+="if not '/imu_talker' in ros_nodes:\n"
-	code+="    command='/home/erle/spider_ws/install_isolated/share/ros_erle_imu/imu_talker'\n"
-	code+="    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)\n"
-	code+="    time.sleep(10)\n"
-	return code;
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/calibrate_imu.py");
+    return code;
+
 };
 
-
-
 Blockly.Python['camera_color_location'] = function(block) {
+
     var color = block.getFieldValue('COLOR');
     var varName_location = Blockly.Python.valueToCode(block, 'LOCATION', Blockly.Python.ORDER_ATOMIC);
 
@@ -155,5 +96,44 @@ Blockly.Python['camera_color_location'] = function(block) {
     code += "colorBGR = \"" + colorBGR.toString() + "\"\n";
     code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/color_location.py");
     return code + varName_location + " = color_location\n"
+
+};
+
+Blockly.Python['start_hokuyo_laser'] = function(block) {
+
+    var code = "";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/start_hokuyo.py");
+    return code;
+
+};
+
+Blockly.Python['start_sick_laser'] = function(block) {
+
+    var code = "";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/start_sick.py");
+    return code;
+
+};
+
+Blockly.Python['start_slam'] = function(block) {
+
+
+    window.open(
+        '/pages/maps/imageViewer.html',
+        '_blank' // <- This is what makes it open in a new window.
+    );
+    var code = "";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/start_slam.py");
+    return code;
+
+};
+
+Blockly.Python['find_path'] = function(block) {
+
+    var varName = Blockly.Python.valueToCode(block, 'path_angle', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/find_path.py");
+    return code + varName + " = path_center_degrees\n"
 
 };
