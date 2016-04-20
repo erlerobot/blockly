@@ -156,7 +156,7 @@ Blockly.Blocks['find_path'] = {
         .appendField("Find path");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(260);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
