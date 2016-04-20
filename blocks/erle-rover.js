@@ -62,15 +62,3 @@ Blockly.Blocks['rover_control'] = {
     this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
-
-Blockly.Blocks['rover_avoid_obstacles'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Avoid Obstacles");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(65);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
-  }
-};
