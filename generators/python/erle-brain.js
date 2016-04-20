@@ -127,3 +127,13 @@ Blockly.Python['start_slam'] = function(block) {
     return code;
 
 };
+
+Blockly.Python['find_path'] = function(block) {
+
+    var varName = Blockly.Python.valueToCode(block, 'path_angle', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/brain/find_path.py");
+    return code + varName + " = path_center_degrees\n"
+
+};

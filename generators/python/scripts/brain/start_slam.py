@@ -12,11 +12,6 @@ import glob
 from sensor_msgs.msg import CompressedImage
 
 ros_nodes = rosnode.get_node_names()
-if not '/urg_node' in ros_nodes:
-    os.system('ifconfig eth0 192.168.0.2')
-    ip_add = '192.168.0.10'
-    command='rosrun urg_node urg_node _ip_address:=' + ip_add
-    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 if not '/hector_mapping' in ros_nodes:
     command='roslaunch hector_mapping mapping_default.launch'
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
@@ -29,11 +24,11 @@ rospack = rospkg.RosPack()
 tiff_path = rospack.get_path('robot_blockly') + '/frontend/pages/maps/'
 
 #while '/hector_mapping' in ros_nodes:
-rate = rospy.Rate(10)
+#rate = rospy.Rate(10)
 pub_img = rospy.Publisher('syscommand', String, queue_size=10, latch=2)
 pub_img.publish("savegeotiff")
 
-con1 = pub_img.get_num_connections()
+#con1 = pub_img.get_num_connections()
 #while not pub_img.get_num_connections() > con1:
 #while  pub_img.get_num_connections() == 0:
  #   rate.sleep()

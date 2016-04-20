@@ -74,13 +74,3 @@ Blockly.Python['spider_turn_degrees'] = function(block) {
     return code;
 
 };
-
-Blockly.Python['spider_avoid_obstacles'] = function(block) {
-
-    var varName = Blockly.Python.valueToCode(block, 'path_angle', Blockly.Python.ORDER_ATOMIC);
-
-    var code = "\n";
-    code += Blockly.readPythonFile("../blockly/generators/python/scripts/spider/avoid_obstacles.py");
-    return code + varName + " = path_center_degrees\n"
-
-};

@@ -122,7 +122,7 @@ Blockly.Blocks['start_hokuyo_laser'] = {
     this.setNextStatement(true);
     this.setColour(0);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
@@ -134,17 +134,29 @@ Blockly.Blocks['start_sick_laser'] = {
     this.setNextStatement(true);
     this.setColour(0);
     this.setTooltip('');
-    this.setHelpUrl('http://www.erlerobotics.com/');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
 };
 
 Blockly.Blocks['start_slam'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Start slam");
+        .appendField("Start SLAM");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
+  }
+};
+
+Blockly.Blocks['find_path'] = {
+  init: function() {
+    this.appendValueInput("path_angle")
+        .appendField("Find path");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(260);
     this.setTooltip('');
     this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
   }
