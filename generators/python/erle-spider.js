@@ -74,3 +74,18 @@ Blockly.Python['spider_turn_degrees'] = function(block) {
     return code;
 
 };
+
+Blockly.Python['spider_walk_meters'] = function(block) {
+
+    var dropdown_direction = block.getFieldValue('direction');
+    var value_direction = Blockly.Python.valueToCode(block, 'direction', Blockly.Python.ORDER_ATOMIC);
+
+    var meters = Blockly.Python.valueToCode(block, 'METERS', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "";
+    code += "dropdown_direction = \"" + dropdown_direction.toString() + "\"\n";
+    code += "meters = " + meters.toString() + "\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/spider/walk_meters.py");
+    return code;
+
+};

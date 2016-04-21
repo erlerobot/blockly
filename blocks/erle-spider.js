@@ -91,3 +91,20 @@ Blockly.Blocks['spider_turn_degrees'] = {
     this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_2_Erle-Spider_Turn_degrees_block.html');
   }
 };
+
+Blockly.Blocks['spider_walk_meters'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Walk ")
+        .appendField(new Blockly.FieldDropdown([["Forward", "forward"], ["Backwards", "backwards"], ["Left", "left"], ["Right", "right"]]), "direction")
+    this.appendValueInput("METERS")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("meters");   
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_2_Erle-Spider_Turn_degrees_block.html');
+  }
+};
