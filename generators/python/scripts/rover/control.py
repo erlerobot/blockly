@@ -28,7 +28,7 @@ def talker():
   msg.channels[steer_channel]=1300
  while not rospy.is_shutdown() and flag:
   sample_time=time.time()
-  if ((sample_time - start) > exec_time):
+  if ((sample_time - start) > float(exec_time)):
    flag=False
   rospy.loginfo(msg)
   pub.publish(msg)
